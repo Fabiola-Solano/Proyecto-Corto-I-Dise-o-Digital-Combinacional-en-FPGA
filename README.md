@@ -69,6 +69,33 @@ El circuito se estructuró en subsistemas interconectados, siguiendo una arquite
 
 ---
 
+## Montaje físico en protoboard  
+Para comprobar el funcionamiento en hardware, se realizaron conexiones físicas entre la FPGA TangNano y una protoboard. El montaje se organizó de la siguiente manera:  
+
+1. **Entradas de la palabra transmitida (4 bits):**  
+   - Se conectaron 4 switches en la protoboard, cada uno con resistencia de pull-down.  
+   - Cada salida del switch se conectó a las entradas correspondientes de la FPGA (según el archivo de constraints).  
+
+2. **Entradas de la palabra recibida (8 bits):**  
+   - Se colocaron 8 switches adicionales que representan la palabra recibida con errores intencionales.  
+   - Estas entradas se cablearon directamente a la FPGA, con resistencias de pull-down para asegurar niveles lógicos definidos.  
+
+3. **Salidas en LEDs:**  
+   - Se conectaron los pines de salida de la FPGA a 4 LEDs en la protoboard mediante resistencias limitadoras de corriente.  
+   - Un LED adicional se reservó para indicar la detección de doble error (DED).  
+
+4. **Displays de 7 segmentos:**  
+   - Se utilizaron dos módulos de display de 7 segmentos montados en la protoboard.  
+   - Los ánodos fueron controlados mediante transistores PNP conectados a la FPGA, de modo que se activara un display u otro según el selector.  
+   - Los cátodos se cablearon directamente a las salidas de la FPGA.
+
+5. **Alimentación:**  
+   - La protoboard se alimentó con 3.3 V desde la FPGA TangNano, asegurando compatibilidad de niveles lógicos.  
+
+El resultado del montaje fue un sistema interactivo: al variar los switches se podían introducir datos y errores, y las correcciones eran reflejadas en tiempo real tanto en LEDs como en los displays.
+
+---
+
 ## Resultados  
 - **Funcionamiento del sistema:** Se logró la codificación de palabras de 4 bits con paridad extendida, la detección de un error sencillo, la corrección automática del mismo y la identificación de errores dobles.  
 - **Simulación:** Se verificaron transiciones de entrada y salida, confirmando la robustez del diseño.  
